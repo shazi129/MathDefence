@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ZWGames;
 
 public class GameController : Recipient
@@ -19,6 +20,7 @@ public class GameController : Recipient
         this.addNotify(NotifyId.ON_NUMBER_BTN_CLICK, handleBtnClick);
         this.addNotify(NotifyId.ON_STONE_BALL_FALLING_END, handleStoneFallingEnd);
         this.addNotify(NotifyId.NOTIFY_GAME_PREPARE_OK, handleGamePrepareOk);
+        this.addNotify(NotifyId.NOTIFY_BULLET_HIT, handleBulletHit);
     }
 
     ~GameController()
@@ -79,22 +81,6 @@ public class GameController : Recipient
         //重置记录的数字
         gameModel.opNumber = -1;
 
-        //如果正确，计分，开始新的一回合
-        if (isCorrect)
-        {
-            //更新分数
-            gameModel.score += 1;
-            gameNotifier.notifydata((int)NotifyId.NOTIFY_SOCRE_UPDATE, gameModel.score);
-
-            //每5分升一级
-            if (gameModel.score > 0 && gameModel.score % 5 == 0)
-            {
-                gameModel.level += 1;
-                gameNotifier.notifydata((int)NotifyId.NOTIFY_LEVEL_UPDATE, gameModel.level);
-            }
-
-            startRound();
-        }
     }
 
     //球落到地上了，游戏结束
@@ -144,4 +130,21 @@ public class GameController : Recipient
         gameModel.resultNumber = msg.data.result;
     }
 
+    private void handleBulletHit(INotifyData obj)
+    {
+        GameModel gameModel = GameModel.getInstance();
+        GameNotifier gameNotifier = GameNotifier.getInstance();
+
+        gameModel.score += 1;
+        gameNotifier.notifydata((int)NotifyId.NOTIFY_SOCRE_UPDATE, gameModel.score);
+
+        //每5分升一级
+        if (gameModel.score > 0 && gameModel.score % 5 == 0)
+        {
+            gameModel.level += 1;
+            gameNotifier.notifydata((int)NotifyId.NOTIFY_LEVEL_UPDATE, gameModel.level);
+        }
+
+        startRound();
+    }
 }

@@ -8,6 +8,9 @@ using ZWGames;
 
 public class Cannon : MonoBehaviour {
 
+    public GameObject bulletPrefab;
+    public GameObject bulletStartArea;
+
     public Text numberText;
 
     private Recipient _recipient = new Recipient();
@@ -50,6 +53,26 @@ public class Cannon : MonoBehaviour {
         args.Add("islocal", true);
         args.Add("position", cannonPosition);
         args.Add("time", 0.2f);
+        args.Add("oncomplete", "shoot");
+        args.Add("oncompletetarget", gameObject);
         iTween.MoveTo(gameObject, args);
+    }
+
+    public void shoot()
+    {
+        //创建一个炮弹
+        RectTransform startTransform = bulletStartArea.GetComponent<RectTransform>();
+        RectTransform thisTransform = transform as RectTransform;
+
+        GameObject bulletObj = GameObject.Instantiate(bulletPrefab);
+        RectTransform bulletTransform = bulletObj.GetComponent<RectTransform>();
+
+        Vector3 position = startTransform.localPosition + thisTransform.localPosition;
+        bulletTransform.localPosition = position;
+        bulletTransform.SetParent(this.transform.parent, false);
+
+        //加一个向上的速度
+        Rigidbody2D rigid2d = bulletObj.GetComponent<Rigidbody2D>();
+        rigid2d.velocity = new Vector2(0, 1000);
     }
 }

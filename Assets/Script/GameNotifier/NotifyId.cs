@@ -15,6 +15,8 @@ public enum NotifyId
     NOTIFY_GAME_END,
 
     NOTIFY_GAME_PREPARE_OK, //gameScene已经准备好了
+
+    NOTIFY_BULLET_HIT, //击中
 }
 
 //一回合开始的消息
