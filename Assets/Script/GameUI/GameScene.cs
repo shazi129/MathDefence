@@ -35,15 +35,16 @@ public class GameScene : MonoBehaviour {
     {
         NotifyData<bool> notifyData = obj as NotifyData<bool>;
 
-        //TODO： 预计是播放动画后清除炮上的字，现在直接清除炮上的字
-        cannon.clearNUmber();
-
         //算对了
         if (notifyData.data == true)
         {
             //将炮移到数字的位置
             float x = _stoneBallObj.transform.localPosition.x;
             cannon.moveToX(x);
+        }
+        else
+        {
+            cannon.shake();
         }
     }
 
@@ -53,6 +54,8 @@ public class GameScene : MonoBehaviour {
 
         //创建一个石球
         resetStoneBall(msg.data.result);
+
+        cannon.clearNumber();
 
         //刷新按键数字
         numberBtnArea.refreshNumbers(msg.data.numbers);

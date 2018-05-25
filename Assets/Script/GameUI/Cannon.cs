@@ -15,11 +15,45 @@ public class Cannon : MonoBehaviour {
 
     private Recipient _recipient = new Recipient();
 
+    private bool shaking = false;
+    private float shakeAmt = 30.0f;
+    private Vector3 shakeOriginalPos;
+
     // Use this for initialization
     void Start ()
     {
         _recipient.addNotify(NotifyId.CANNON_NUMBER_CHANGE, onOpNumberChanged);
 	}
+
+    private void Update()
+    {
+        if (shaking)
+        {
+            float x = UnityEngine.Random.insideUnitSphere.x * shakeAmt;
+            Vector3 newPos = shakeOriginalPos;
+            newPos.x += x;
+            transform.localPosition = newPos;
+        }
+    }
+
+    public void shake()
+    {
+        StartCoroutine("shakeNow");
+    }
+
+    IEnumerator shakeNow()
+    {
+        shakeOriginalPos = transform.localPosition;
+        if (shaking == false)
+        {
+            shaking = true;
+        }
+        yield return new WaitForSeconds(0.5f);
+        shaking = false;
+        transform.localPosition = shakeOriginalPos;
+
+        clearNumber();
+    }
 
     private void OnDestroy()
     {
@@ -39,7 +73,7 @@ public class Cannon : MonoBehaviour {
         }
     }
 
-    public void clearNUmber()
+    public void clearNumber()
     {
         numberText.text = "";
     }
