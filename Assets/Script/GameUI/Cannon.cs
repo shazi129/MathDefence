@@ -10,8 +10,9 @@ public class Cannon : MonoBehaviour {
 
     public GameObject bulletPrefab;
     public GameObject bulletStartArea;
-
     public Text numberText;
+
+    public NumberBtnArea btnArea;
 
     private Recipient _recipient = new Recipient();
 
@@ -76,6 +77,7 @@ public class Cannon : MonoBehaviour {
     public void clearNumber()
     {
         numberText.text = "";
+        btnArea.enableAllBtns();
     }
 
     public void moveToX(float x)

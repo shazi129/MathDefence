@@ -1564,6 +1564,7 @@ MonoBehaviour:
     type: 2}
   bulletStartArea: {fileID: 1670043222871858}
   numberText: {fileID: 114459860979570356}
+  btnArea: {fileID: 114975593624820308}
 --- !u!114 &114835337501056964
 MonoBehaviour:
   m_ObjectHideFlags: 1

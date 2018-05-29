@@ -15,6 +15,14 @@ public class NumberBtnArea : MonoBehaviour {
     {
     }
 
+    public void enableAllBtns()
+    {
+        for (int i = 0; i < btnAreas.Count; i++)
+        {
+            btnAreas[i].setBtnEnable(true);
+        }
+    }
+
     public void refreshNumbers(List<int> numbers)
     {
         if (numbers == null || numbers.Count != btnAreas.Count)
