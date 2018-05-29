@@ -2,9 +2,22 @@
 
 public enum NotifyId
 {
+    //通知各界面的展示
+    NOTIFY_SHOW_GAME_SCENE,
+    NOTIFY_SHOW_STOP_MENU,
+    NOTIFY_SHOW_SETTING_MENU,
+    NOTIFY_SHOW_GAME_END,
 
+    STOP_GAME, //暂停游戏
     START_A_ROUND, //开始一回合
+    CONTINUE_GAME, //继续游戏
+    RESTART_GAME, //重新开始游戏
+
+    //点击操作类
     ON_NUMBER_BTN_CLICK,  //按钮点击
+
+
+    ///////////////
     CANNON_NUMBER_CHANGE, //炮上的数字改变
 
     ON_STONE_BALL_FALLING_END, //

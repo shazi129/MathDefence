@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using ZWGames;
+using System;
 
 public class GameInstance : MonoBehaviour {
 
@@ -14,8 +16,9 @@ public class GameInstance : MonoBehaviour {
         E_MENU_LAYER_TYPE,
     }
 
-    public int entrySceneIndex = 0;
+    public int _entrySceneIndex = 0;
 
+    //界面合集
     private GameObjectList _sceneList;
     public GameObjectList sceneList
     {
@@ -26,26 +29,41 @@ public class GameInstance : MonoBehaviour {
         }
     }
 
+    //通知
+    private Recipient _recipient = new Recipient();
+
     private void Start()
     {
+        _recipient.addNotify(NotifyId.NOTIFY_SHOW_STOP_MENU, showStopMenu);
+        _recipient.addNotify(NotifyId.NOTIFY_SHOW_GAME_END, showStopMenu);
+
         GameController.getInstance();
-        showScene(entrySceneIndex);
+        showScene(_entrySceneIndex);
     }
 
+    private void showStopMenu(INotifyData obj)
+    {
+        GameObject menu = showScene(1, SceneLayerType.E_MENU_LAYER_TYPE);
+        StopMenu logic = menu.GetComponent<StopMenu>();
+        if (logic != null)
+        {
+            logic.setGameEndDisplay(obj.id == (int)NotifyId.NOTIFY_SHOW_GAME_END);
+        }
+    }
 
-    public void showScene(int sceneIndex, SceneLayerType layerType= SceneLayerType.E_GAME_LAYER_TYPE)
+    public GameObject showScene(int sceneIndex, SceneLayerType layerType= SceneLayerType.E_GAME_LAYER_TYPE)
     {
         if (sceneList == null || sceneList.Count == 0)
         {
             Debug.Log("GameInstance::showScene, empty scene list");
-            return;
+            return null;
         }
 
         GameObject scene = sceneList.getIndex(sceneIndex);
         if (scene == null)
         {
             Debug.Log("GameInstance::showScene, cannot find gameobj of index:" + sceneIndex);
-            return;
+            return null;
         }
 
         GameObject parentLayer = layerType == SceneLayerType.E_GAME_LAYER_TYPE ? gameLayer : menuLayer;
@@ -70,6 +88,8 @@ public class GameInstance : MonoBehaviour {
             Image menuBg = newGameScene.AddComponent<Image>();
             menuBg.color = new Color(0, 0, 0, 0.72f);
         }
+
+        return newGameScene;
     }
 
 }

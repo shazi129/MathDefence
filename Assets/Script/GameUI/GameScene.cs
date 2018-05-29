@@ -21,10 +21,12 @@ public class GameScene : MonoBehaviour {
     {
         _recipient.addNotify(NotifyId.START_A_ROUND, startRound);
         _recipient.addNotify(NotifyId.NOTIFY_OP_RESULT, showOpResult);
+        _recipient.addNotify(NotifyId.NOTIFY_SHOW_STOP_MENU, stopGame);
 
         GameNotifier.getInstance().notifyStateChange((int)NotifyId.NOTIFY_GAME_PREPARE_OK);
 
     }
+
 
     private void OnDestroy()
     {
@@ -39,8 +41,15 @@ public class GameScene : MonoBehaviour {
         if (notifyData.data == true)
         {
             //将炮移到数字的位置
-            float x = _stoneBallObj.transform.localPosition.x;
-            cannon.moveToX(x);
+            if (_stoneBallObj != null)
+            {
+                float x = _stoneBallObj.transform.localPosition.x;
+                cannon.moveToX(x);
+            }
+            else
+            {
+                Debug.LogError("GameScene.showOpResult: _stoneBallObj is null");
+            }
         }
         else
         {
@@ -109,4 +118,15 @@ public class GameScene : MonoBehaviour {
             logic.setNumber(ballNumber);
         }
     }
+
+    //暂停游戏
+    private void stopGame(INotifyData obj)
+    {
+        if (_stoneBallObj != null)
+        {
+            Destroy(_stoneBallObj);
+            _stoneBallObj = null;
+        }
+    }
+
 }

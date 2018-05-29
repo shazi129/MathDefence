@@ -18,8 +18,11 @@ public class StoneBall : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        //TODO: 需要重新设置速度么？
-        GameNotifier.getInstance().notifyStateChange((int)NotifyId.ON_STONE_BALL_FALLING_END);
+        //如果不是子弹打的, 游戏结束
+        if (!coll.gameObject.name.StartsWith("Bullet"))
+        {
+            GameNotifier.getInstance().notifyStateChange((int)NotifyId.ON_STONE_BALL_FALLING_END);
+        }
     }
 
     public void setNumber(int number)

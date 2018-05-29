@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using ZWGames;
@@ -16,7 +17,14 @@ public class GameTitle : MonoBehaviour {
     {
         _recipient.addNotify(NotifyId.NOTIFY_SOCRE_UPDATE, onScroeUpdate);
         _recipient.addNotify(NotifyId.NOTIFY_LEVEL_UPDATE, onLevelUpdate);
+
+        stopBtn.onClick.AddListener(onStopBtnClick);
 	}
+
+    private void onStopBtnClick()
+    {
+        GameNotifier.getInstance().notifyStateChange((int)NotifyId.STOP_GAME);
+    }
 
     private void OnDestroy()
     {

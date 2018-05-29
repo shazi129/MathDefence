@@ -21,6 +21,9 @@ public class GameController : Recipient
         this.addNotify(NotifyId.ON_STONE_BALL_FALLING_END, handleStoneFallingEnd);
         this.addNotify(NotifyId.NOTIFY_GAME_PREPARE_OK, handleGamePrepareOk);
         this.addNotify(NotifyId.NOTIFY_BULLET_HIT, handleBulletHit);
+        this.addNotify(NotifyId.STOP_GAME, handleStopGame);
+        this.addNotify(NotifyId.CONTINUE_GAME, handleContinuGame);
+        this.addNotify(NotifyId.RESTART_GAME, handleRestartGame);
     }
 
     ~GameController()
@@ -86,8 +89,7 @@ public class GameController : Recipient
     //球落到地上了，游戏结束
     public void handleStoneFallingEnd(INotifyData obj)
     {
-        //GameNotifier.getInstance().notifyStateChange((int)NotifyId.NOTIFY_GAME_END);
-        startRound();
+        GameNotifier.getInstance().notifyStateChange((int)NotifyId.NOTIFY_SHOW_GAME_END);
     }
 
     public void startRound()
@@ -147,4 +149,21 @@ public class GameController : Recipient
 
         startRound();
     }
+
+    private void handleStopGame(INotifyData obj)
+    {
+        GameNotifier.getInstance().notifyStateChange((int)NotifyId.NOTIFY_SHOW_STOP_MENU);
+    }
+
+
+    private void handleContinuGame(INotifyData obj)
+    {
+        startRound();
+    }
+
+    private void handleRestartGame(INotifyData obj)
+    {
+        handleGamePrepareOk(obj);
+    }
+
 }

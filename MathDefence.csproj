@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.6.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -99,10 +101,9 @@
     <Compile Include="Assets\Script\GameUI\Bullet.cs" />
     <Compile Include="Assets\Script\GameUI\Cannon.cs" />
     <Compile Include="Assets\Script\GameUI\GameBackground.cs" />
-    <Compile Include="Assets\Script\GameUI\GameEndPanel.cs" />
+    <Compile Include="Assets\Script\GameUI\StopMenu.cs" />
     <Compile Include="Assets\Script\GameUI\GameScene.cs" />
     <Compile Include="Assets\Script\GameUI\GameTitle.cs" />
-    <Compile Include="Assets\Script\GameUI\MenuLayer.cs" />
     <Compile Include="Assets\Script\GameUI\NumberBtn.cs" />
     <Compile Include="Assets\Script\GameUI\NumberBtnArea.cs" />
     <Compile Include="Assets\Script\GameUI\StoneBall.cs" />
