@@ -68,11 +68,21 @@ public class GameInstance : MonoBehaviour {
 
         GameObject parentLayer = layerType == SceneLayerType.E_GAME_LAYER_TYPE ? gameLayer : menuLayer;
 
-        //先清除GameLayer下所有子物体
-        for (int i = 0; i < parentLayer.transform.childCount; i++)
+        //不管怎么样，都要清除menu
+        for (int i = 0; i < menuLayer.transform.childCount; i++)
         {
-            GameObject child = parentLayer.transform.GetChild(i).gameObject;
+            GameObject child = menuLayer.transform.GetChild(i).gameObject;
             Destroy(child);
+        }
+
+        //如果是展示game，清除GameLayer下所有子物体
+        if (layerType == SceneLayerType.E_GAME_LAYER_TYPE)
+        {
+            for (int i = 0; i < gameLayer.transform.childCount; i++)
+            {
+                GameObject child = gameLayer.transform.GetChild(i).gameObject;
+                Destroy(child);
+            }
         }
 
         //将go放到GameLayer下
