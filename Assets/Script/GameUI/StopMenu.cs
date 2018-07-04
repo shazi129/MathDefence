@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using System;
 using ZWGames;
 
+using UnityEngine.Advertisements;
+
 public class StopMenu : MonoBehaviour {
 
     public Button settingBtn;
@@ -18,6 +20,9 @@ public class StopMenu : MonoBehaviour {
         continueBtn.onClick.AddListener(onContinueBtnClick);
         restartBtn.onClick.AddListener(onRestartBtnClick);
         exitBtn.onClick.AddListener(onExitBtnClick);
+
+        Advertisement.Initialize("bf8a3ba1-6d02-4b9c-a1c4-000609e764e9");
+        Advertisement.Show();
     }
 
     public void setGameEndDisplay(bool isGameEnd)
