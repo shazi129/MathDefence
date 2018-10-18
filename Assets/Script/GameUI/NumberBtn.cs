@@ -18,6 +18,9 @@ public class NumberBtn : MonoBehaviour {
     {
         GameNotifier.getInstance().notifydata((int)NotifyId.ON_NUMBER_BTN_CLICK, int.Parse(numberText.text));
 
+        //播放按键音
+        GameNotifier.getInstance().notifyStateChange((int)NotifyId.NOTIFY_PLAY_BUTTON_PRESSED_SOUND);
+
         //处于按下状态，不能再点击
         setBtnEnable(false);
     }

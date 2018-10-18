@@ -96,6 +96,7 @@
     <Compile Include="Assets\Script\GameNotifier\NotifyData.cs" />
     <Compile Include="Assets\Script\GameNotifier\NotifyId.cs" />
     <Compile Include="Assets\Script\GameNotifier\Recipient.cs" />
+    <Compile Include="Assets\Script\GameUI\AudioManager.cs" />
     <Compile Include="Assets\Script\GameUI\Bullet.cs" />
     <Compile Include="Assets\Script\GameUI\Cannon.cs" />
     <Compile Include="Assets\Script\GameUI\GameBackground.cs" />

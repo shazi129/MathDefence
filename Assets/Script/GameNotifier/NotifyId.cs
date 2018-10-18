@@ -30,6 +30,8 @@ public enum NotifyId
     NOTIFY_GAME_PREPARE_OK, //gameScene已经准备好了
 
     NOTIFY_BULLET_HIT, //击中
+
+    NOTIFY_PLAY_BUTTON_PRESSED_SOUND, //播放按键声
 }
 
 //一回合开始的消息
